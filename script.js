@@ -88,4 +88,40 @@ document.querySelectorAll('.product-card').forEach(card => {
         card.style.transform = 'translateY(0)';
         card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
     });
+});
+
+// Image Modal Functionality
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImage');
+const closeBtn = document.querySelector('.modal-close');
+
+// Add click event to all product images
+document.querySelectorAll('.product-card img').forEach(img => {
+    img.addEventListener('click', function() {
+        modal.style.display = 'block';
+        modalImg.src = this.src;
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    });
+});
+
+// Close modal when clicking the close button
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+});
+
+// Close modal when clicking outside the image
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+});
+
+// Close modal with escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
 }); 
